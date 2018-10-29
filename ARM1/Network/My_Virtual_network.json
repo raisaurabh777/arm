@@ -1,0 +1,125 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "vnetName": {
+            "defaultValue": "My_Virtual_network",
+            "type": "String",
+            "metadata": {
+                "description": "VNet name"
+            }
+        },
+        "vnetAddressPrefix": {
+            "defaultValue": "172.22.192.0/19",
+            "type": "String",
+            "metadata": {
+                "description": "Address prefix"
+            }
+        },
+        "subnet1Prefix": {
+            "defaultValue": "172.22.192.0/21",
+            "type": "String",
+            "metadata": {
+                "description": "Subnet 1 Prefix"
+            }
+        },
+        "subnet1Name": {
+            "defaultValue": "Web_subnet",
+            "type": "String",
+            "metadata": {
+                "description": "Subnet 1 Name"
+            }
+        },
+        "subnet2Prefix": {
+            "defaultValue": "172.22.200.0/21",
+            "type": "String",
+            "metadata": {
+                "description": "Subnet 2 Prefix"
+            }
+        },
+        "subnet2Name": {
+            "defaultValue": "App_subnet",
+            "type": "String",
+            "metadata": {
+                "description": "Subnet 2 Name"
+            }
+        },
+        "subnet3Prefix": {
+            "defaultValue": "172.22.208.0/23",
+            "type": "String",
+            "metadata": {
+                "description": "Subnet 3 Prefix"
+            }
+        },
+        "subnet3Name": {
+            "defaultValue": "DB_subnet",
+            "type": "String",
+            "metadata": {
+                "description": "Subnet 3 Name"
+            }
+        },
+        "location": {
+            "defaultValue": "[resourceGroup().location]",
+            "type": "String",
+            "metadata": {
+                "description": "Location for all resources."
+            }
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.Network/virtualNetworks",
+            "name": "[parameters('vnetName')]",
+            "apiVersion": "2018-06-01",
+            "location": "[parameters('location')]",
+            "properties": {
+                "addressSpace": {
+                    "addressPrefixes": [
+                        "[parameters('vnetAddressPrefix')]"
+                    ]
+                }
+            },
+            "resources": [
+                {
+                    "type": "subnets",
+                    "name": "[parameters('subnet1Name')]",
+                    "apiVersion": "2018-06-01",
+                    "location": "[parameters('location')]",
+                    "properties": {
+                        "addressPrefix": "[parameters('subnet1Prefix')]"
+                    },
+                    "dependsOn": [
+                        "[parameters('vnetName')]"
+                    ]
+                },
+                {
+                    "type": "subnets",
+                    "name": "[parameters('subnet2Name')]",
+                    "apiVersion": "2018-06-01",
+                    "location": "[parameters('location')]",
+                  "properties": {
+                    "addressPrefix": "[parameters('subnet2Prefix')]"
+                  },
+                    "dependsOn": [
+                        "[parameters('vnetName')]",
+                        "[parameters('subnet1Name')]"
+                    ]
+                },
+                {
+                    "type": "subnets",
+                    "name": "[parameters('subnet3Name')]",
+                    "apiVersion": "2018-06-01",
+                    "location": "[parameters('location')]",
+                    "properties": {
+                        "addressPrefix": "[parameters('subnet3Prefix')]"
+                    },
+                    "dependsOn": [
+                        "[parameters('vnetName')]",
+                        "[parameters('subnet2Name')]"
+                    ]
+                }
+            ]
+        }
+    ]
+}

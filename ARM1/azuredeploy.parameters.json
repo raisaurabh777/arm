@@ -1,0 +1,60 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+  "parameters": {
+    "newStorageAccountName": {
+      "value": "myhcfstorageaccount"
+    },
+    "publicWebIPName": {
+      "value": "Web-Vm1-publicip"
+    },
+    "publicAppIPName": {
+      "value": "App-Vm2-publicip"
+    },
+    "publicDbIPName": {
+      "value": "Db-Vm3-publicip"
+    },
+    "vmWebName": {
+      "value": "Web-vm1"
+    },
+    "vmAppName": {
+      "value": "App-vm2"
+    },
+    "vmDbName": {
+      "value": "DB-vm3"
+    },
+    "adminUsername": {
+      "value": "vmadmin"
+    },
+    "virtualNetworkName": {
+      "value": "My_Virtual_network"
+    },
+    "virtualNetworkResourceGroup": {
+      "value": "NetworkRG"
+    },
+    "subnetWebName": {
+      "value": "Web_subnet"
+    },
+    "subnetAppName": {
+      "value": "App_subnet"
+    },
+    "subnetDbName": {
+      "value": "DB_subnet"
+    },
+    "nicWebName": {
+      "value": "Web-vm1-nic"
+    },
+    "nicAppName": {
+      "value": "App-vm2-nic"
+    },
+    "nicDbName": {
+      "value": "Db-vm3-nic"
+    },
+    "imageSKU": {
+      "value": "18.04-LTS"
+    },
+    "adminPassword": {
+      "value": "SauAsus@123"
+    }
+  }
+}
